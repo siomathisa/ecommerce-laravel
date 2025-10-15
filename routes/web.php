@@ -25,6 +25,13 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/cart/{cartItem}', [CartItemController::class, 'destroy'])->name('cart.destroy');
 });
 
+// 🧾 Commandes
+Route::middleware(['auth'])->group(function () {
+    Route::post('/orders', [App\Http\Controllers\OrderController::class, 'store'])->name('orders.store');
+    Route::get('/orders', [App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
+});
+
+
 Route::get('/', function () {
     return view('welcome');
 });
