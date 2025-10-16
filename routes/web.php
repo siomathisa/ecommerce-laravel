@@ -31,6 +31,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orders', [App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
 });
 
+// 🧰 Commandes admin
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/orders', [App\Http\Controllers\Admin\OrderAdminController::class, 'index'])->name('admin.orders.index');
+    Route::put('/admin/orders/{order}/status', [App\Http\Controllers\Admin\OrderAdminController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+});
+
 
 Route::get('/', function () {
     return view('welcome');

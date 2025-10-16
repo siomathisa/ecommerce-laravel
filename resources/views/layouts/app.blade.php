@@ -22,13 +22,17 @@
                 <a href="{{ route('cart.index') }}" class="flex items-center gap-1 text-white hover:text-yellow-300 relative">
                     🛒 Panier
                     @php
-                        $count = \App\Models\CartItem::where('user_id', auth()->id())->count();
+                    $count = \App\Models\CartItem::where('user_id', auth()->id())->count();
                     @endphp
                     @if($count > 0)
-                        <span class="absolute -top-2 -right-3 bg-yellow-500 text-white text-xs px-2 py-0.5 rounded-full">{{ $count }}</span>
+                    <span class="absolute -top-2 -right-3 bg-yellow-500 text-white text-xs px-2 py-0.5 rounded-full">{{ $count }}</span>
                     @endif
                 </a>
                 @endauth
+                @auth
+                <a href="{{ route('orders.index') }}" class="hover:text-yellow-300">📦 Mes commandes</a>
+                @endauth
+
             </div>
 
             <!-- Utilisateur / admin / logout droite -->
@@ -37,7 +41,7 @@
                 <span class="hidden sm:inline">Salut, {{ Auth::user()->name }}</span>
 
                 @if(Auth::user()->is_admin)
-                    <a href="{{ route('admin.products.index') }}" class="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded transition">Admin</a>
+                <a href="{{ route('admin.products.index') }}" class="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded transition">Admin</a>
                 @endif
 
                 <form action="{{ route('logout') }}" method="POST" class="inline">
@@ -60,18 +64,22 @@
     <div id="mobile-menu" class="sm:hidden hidden bg-gray-700 text-white px-4 py-2 flex flex-col space-y-2">
         <a href="{{ url('/') }}" class="hover:text-yellow-300">🏠 Accueil</a>
         <a href="{{ route('products.index') }}" class="hover:text-yellow-300">🛍️ Produits</a>
-        
+
         @auth
         <a href="{{ route('cart.index') }}" class="hover:text-yellow-300 flex items-center justify-between">
             🛒 Panier
             @php
-                $count = \App\Models\CartItem::where('user_id', auth()->id())->count();
+            $count = \App\Models\CartItem::where('user_id', auth()->id())->count();
             @endphp
             @if($count > 0)
-                <span class="bg-yellow-500 text-white text-xs px-2 py-0.5 rounded-full">{{ $count }}</span>
+            <span class="bg-yellow-500 text-white text-xs px-2 py-0.5 rounded-full">{{ $count }}</span>
             @endif
         </a>
         @endauth
+        @auth
+        <a href="{{ route('orders.index') }}" class="hover:text-yellow-300">📦 Mes commandes</a>
+        @endauth
+
 
         @auth
         @if(Auth::user()->is_admin)
@@ -106,4 +114,5 @@
     </script>
 
 </body>
+
 </html>
