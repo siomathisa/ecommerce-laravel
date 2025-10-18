@@ -41,8 +41,16 @@
                 <span class="hidden sm:inline">Salut, {{ Auth::user()->name }}</span>
 
                 @if(Auth::user()->is_admin)
-                <a href="{{ route('admin.products.index') }}" class="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded transition">Admin</a>
+                <a href="{{ route('admin.products.index') }}"
+                    class="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded transition">
+                    Produits
+                </a>
+                <a href="{{ route('admin.orders.index') }}"
+                    class="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded transition">
+                    Commandes
+                </a>
                 @endif
+
 
                 <form action="{{ route('logout') }}" method="POST" class="inline">
                     @csrf
@@ -83,8 +91,16 @@
 
         @auth
         @if(Auth::user()->is_admin)
-        <a href="{{ route('admin.products.index') }}" class="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded transition">Admin</a>
+        <a href="{{ route('admin.products.index') }}"
+            class="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded transition">
+            Produits
+        </a>
+        <a href="{{ route('admin.orders.index') }}"
+            class="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded transition">
+            Commandes
+        </a>
         @endif
+
         <form action="{{ route('logout') }}" method="POST" class="inline">
             @csrf
             <button type="submit" class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded transition w-full text-left">Déconnexion</button>
