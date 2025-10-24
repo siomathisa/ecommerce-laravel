@@ -1,61 +1,133 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🛍️ Projet E-commerce Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Un site e-commerce complet développé avec **Laravel**, permettant à des utilisateurs de :
+- parcourir et acheter des produits,
+- gérer un panier,
+- passer des commandes,
+- et à un administrateur de gérer le catalogue et les ventes.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Aperçu
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+> Projet full-stack PHP / Laravel — développé en autodidacte
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Fonctionnalités principales :
+- 🔐 Authentification (inscription, connexion, rôles utilisateur/admin)
+- 🧱 Gestion des produits (CRUD complet)
+- 🛒 Panier fonctionnel (ajout, suppression, total dynamique)
+- 📦 Commandes avec mise à jour du stock
+- 🧰 Espace administrateur pour gérer les commandes et leur statut
+- 💅 Interface responsive avec TailwindCSS
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ⚙️ Stack technique
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+| Catégorie | Technologies |
+|------------|---------------|
+| **Langage principal** | PHP 8 / Laravel 11 |
+| **Base de données** | MySQL |
+| **Front-end** | Blade, TailwindCSS |
+| **Outils** | Laragon, Composer, Git, GitHub |
+| **Méthode** | MVC (Model-View-Controller) |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🧩 Structure du projet
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+app/
+├── Http/
+│ ├── Controllers/
+│ │ ├── ProductController.php
+│ │ ├── CartItemController.php
+│ │ ├── OrderController.php
+│ │ └── Admin/
+│ │ ├── ProductAdminController.php
+│ │ └── OrderAdminController.php
+│
+├── Models/
+│ ├── Product.php
+│ ├── CartItem.php
+│ ├── Order.php
+│
+resources/
+├── views/
+│ ├── products/
+│ ├── cart/
+│ ├── orders/
+│ ├── admin/
+│ └── layouts/
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 🔄 Logique d’application
 
-## Contributing
+1. **Authentification**  
+   Laravel Breeze gère l’inscription et la connexion.  
+   Un champ `is_admin` distingue les comptes administrateurs.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2. **Produits**  
+   Les produits sont stockés dans la table `products` avec `name`, `description`, `price`, `stock`.  
+   Les administrateurs peuvent créer, modifier ou supprimer des produits.
 
-## Code of Conduct
+3. **Panier et commandes**  
+   - Chaque utilisateur peut ajouter des produits à son panier (`cart_items`).
+   - Lorsqu’il passe commande, une nouvelle entrée `order` est créée.
+   - Le stock est automatiquement réduit pour chaque produit commandé.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4. **Espace admin**  
+   - Accessible uniquement aux administrateurs (`middleware`).
+   - Vue de toutes les commandes avec mise à jour du statut possible.
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 💡 Points techniques clés
 
-## License
+- **Middleware personnalisé** pour protéger les routes admin.  
+- **Relations Eloquent** :  
+  - `User` ↔ `Order` ↔ `OrderItem`  
+  - `User` ↔ `CartItem` ↔ `Product`
+- **Gestion du stock** automatique lors de la validation d’une commande.  
+- **Front-end** basé sur **TailwindCSS**, avec une **navbar responsive** incluant le compteur du panier.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## ⚠️ Problèmes rencontrés et solutions
+
+| Problème | Solution |
+|-----------|-----------|
+| Migrations dupliquées | Utilisation de `php artisan migrate:fresh` |
+| Middleware non reconnu | Déplacement correct des contrôleurs et héritage de `Controller` |
+| Erreurs d’accès admin | Vérification du champ `is_admin` dans le middleware |
+| Gestion du panier | Utilisation d’un modèle `CartItem` lié à `User` et `Product` |
+
+---
+
+## 🧑‍💻 Auteur
+
+**Mathis Vidueira**  
+🎓 Étudiant en Bachelor 3 – Développement Web  
+🔗 [Mon portfolio](https://mathisvidueira-portfolio.vercel.app/)
+
+---
+
+## 🧭 Installation (pour test local)
+
+```bash
+# Cloner le dépôt
+git clone https://github.com/siomathisa/ecommerce-laravel.git
+
+# Installer les dépendances
+composer install
+npm install && npm run dev
+
+# Configurer le fichier .env
+cp .env.example .env
+php artisan key:generate
+
+# Créer la base de données et lancer les migrations
+php artisan migrate --seed
+
+# Lancer le serveur local
+php artisan serve
