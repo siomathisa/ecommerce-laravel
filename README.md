@@ -36,6 +36,7 @@ Un site e-commerce complet développé avec **Laravel**, permettant à des utili
 
 ## 🧩 Structure du projet
 
+```bash
 app/
 ├── Http/
 │ ├── Controllers/
@@ -58,6 +59,7 @@ resources/
 │ ├── orders/
 │ ├── admin/
 │ └── layouts/
+```
 
 ---
 
